@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "zephryx-academy",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-08-06",
+  "vars": {
+    "WAITLIST_TO": "academy@zephryx.in",
+    "WAITLIST_FROM": "Zephryx Academy <noreply@mail.zephryx.in>"
+  },
+  "assets": {
+    "directory": "out",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "404-page"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

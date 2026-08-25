@@ -1,0 +1,31 @@
+{
+  "name": "zephryx-academy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Zephryx Academy — hands-on offensive security training",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "npx serve@latest out",
+    "lint": "next lint",
+    "preview": "npm run build && npx wrangler dev",
+    "deploy": "npm run build && npx wrangler deploy"
+  },
+  "dependencies": {
+    "next": "^15.5.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.13",
+    "@types/node": "^22.15.3",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.8.3",
+    "wrangler": "^4.34.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
