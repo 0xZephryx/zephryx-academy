@@ -25,6 +25,7 @@ export const NAV = [
   { href: '/', label: 'Home', cmd: '~' },
   { href: '/about/', label: 'About', cmd: 'whoami' },
   { href: '/tracks/', label: 'Tracks', cmd: 'ls' },
+  { href: '/cheatsheets/', label: 'Cheatsheets', cmd: 'find' },
 ] as const;
 
 export type Track = {
