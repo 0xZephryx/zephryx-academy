@@ -4,14 +4,25 @@ Next.js 15 App Router, static export (`out/`) served by Cloudflare Workers.
 Sibling of `zephryx.in` and deliberately a separate Worker — the two deploy
 independently so a bad push here can't take the main site down.
 
-This is the **pre-launch** state: the site is complete, no course content is
-published, and the waitlist is the only thing it collects.
+This is still **pre-launch** for the paid tracks: no course content is
+published and the waitlist is the only thing that collects a lead. The one
+exception is `/cheatsheets/` — free quick-reference PDFs, migrated over from
+`zephryx.in` so all study material lives on this domain. Free stays free; that
+migration is not a preview of the paid tracks.
 
 ## Where things live
 
 - `src/lib/site.ts` is the single source of truth for identity, nav and the
   track list. Nothing else should hardcode a link, an email address or a course
   name. Announcing a track as open is a `status` change in that file.
+- `content/cheatsheets/` + `src/lib/cheatsheets.ts` are the cheatsheets
+  pipeline, ported from `zephryx.in`'s: frontmatter-only `.md` files, each
+  naming a PDF under `public/cheatsheets/`. The build throws if a cheatsheet's
+  `file` field is malformed or the PDF is missing — the build is the
+  validator, same rule as the sibling repo. `CheatsheetsIndex.tsx` is a
+  standalone client filter (category + local text match); it does not pull in
+  `zephryx.in`'s cross-content search machinery, because this site has no
+  writeups or detections to cross-link against.
 - `worker/index.ts` handles `/api/waitlist` and nothing else; every other
   request falls through to the static assets.
 - `public/_headers` carries the CSP and the rest of the security headers,
@@ -41,9 +52,9 @@ Two rules worth stating outright:
 - The CSP is `default-src 'self'`. Any external script, font or analytics origin
   needs `public/_headers` widened first, and that should be a deliberate
   decision rather than a fix for a broken embed.
-- When course content does arrive, follow the sibling repo's shape: Markdown
-  under `content/`, rendered at build time, with the build acting as the
-  validator — a broken link or a missing asset should fail `npm run build`
-  rather than ship a quiet gap. That repo's CLAUDE.md also carries a standing
-  rule about copy controls on anything a reader might take; it applies here the
-  moment this site starts publishing commands or rules.
+- When the paid course content arrives, follow the same shape the cheatsheets
+  pipeline already established: Markdown under `content/`, rendered at build
+  time, with the build acting as the validator. `zephryx.in`'s CLAUDE.md also
+  carries a standing rule about copy controls on anything a reader might take
+  (fenced code blocks, single values); it applies here the moment this site
+  publishes commands or rules, not just PDFs.
