@@ -18,7 +18,6 @@ export const SITE = {
 
 export const MAILBOX = {
   address: 'academy@zephryx.in',
-  fallback: 'contact@zephryx.in',
 } as const;
 
 export const NAV = [
