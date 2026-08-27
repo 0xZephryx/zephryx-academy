@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { SITE, TRACKS } from '@/lib/site';
+import { getCheatsheetCount } from '@/lib/cheatsheets';
 import WaitlistForm from '@/components/WaitlistForm';
 
 const PRINCIPLES = [
@@ -26,6 +27,8 @@ const PRINCIPLES = [
 ];
 
 export default function Home() {
+  const cheatsheetCount = getCheatsheetCount();
+
   return (
     <>
       {/* ---------------------------------------------------------------- hero */}
@@ -70,6 +73,33 @@ export default function Home() {
             <span className="text-red-blood/70">$</span> nothing is for sale yet — the waitlist is
             how you hear first, and how I decide what to build first.
           </p>
+        </div>
+      </section>
+
+      {/* -------------------------------------------------------- cheatsheets */}
+      <section className="mx-auto max-w-6xl px-5 pb-4 sm:px-8">
+        <div className="panel clip-corner flex flex-col items-start justify-between gap-6 p-7 sm:flex-row sm:items-center">
+          <div>
+            <p className="flex items-center gap-2.5 font-mono text-[11px] tracking-[0.3em] text-signal">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-signal" />
+              AVAILABLE NOW — FREE
+            </p>
+            <h2 className="mt-3 font-mono text-xl font-semibold text-ink sm:text-2xl">
+              {cheatsheetCount} quick-reference cheatsheets, no waitlist required
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-dim">
+              The tracks below are still being built, but the reference PDFs already are —
+              Active Directory enumeration, web app testing, network recon and more. No login, no
+              paywall, and that doesn&apos;t change when the paid courses launch.
+            </p>
+          </div>
+          <Link
+            href="/cheatsheets/"
+            className="clip-tab inline-flex shrink-0 items-center gap-2 border border-red-deep bg-red-core px-6 py-3 font-mono text-sm font-medium text-void transition-all duration-300 hover:shadow-[0_0_30px_-4px_rgba(255,45,75,0.8)]"
+          >
+            browse cheatsheets
+            <span aria-hidden>→</span>
+          </Link>
         </div>
       </section>
 
