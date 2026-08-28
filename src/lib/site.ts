@@ -20,6 +20,32 @@ export const MAILBOX = {
   address: 'academy@zephryx.in',
 } as const;
 
+/**
+ * The rest of the network.
+ *
+ * Hostnames belong here rather than inline in a page, same rule as everything
+ * else in this file. The research corpus moved to its own domain, which is the
+ * sort of change that quietly falsifies any hostname written out by hand
+ * somewhere else in the tree.
+ */
+export const NETWORK = [
+  {
+    href: 'https://zephryx.in/',
+    host: 'zephryx.in',
+    blurb: 'portfolio & tooling',
+  },
+  {
+    href: 'https://writeups.zephryx.in/',
+    host: 'writeups.zephryx.in',
+    blurb: 'research & writeups',
+  },
+  {
+    href: 'https://security.zephryx.in/',
+    host: 'security.zephryx.in',
+    blurb: 'pentest services',
+  },
+] as const;
+
 export const NAV = [
   { href: '/', label: 'Home', cmd: '~' },
   { href: '/about/', label: 'About', cmd: 'whoami' },

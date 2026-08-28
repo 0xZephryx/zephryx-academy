@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { MAILBOX, NAV, SITE } from '@/lib/site';
+import { MAILBOX, NAV, NETWORK, SITE } from '@/lib/site';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -57,19 +57,24 @@ export default function Footer() {
                   {MAILBOX.address}
                 </a>
               </li>
-              <li>
-                <a
-                  href={SITE.parentUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 font-mono text-sm text-ink-dim transition-colors hover:text-red-blood"
-                >
-                  zephryx.in
-                  <span className="text-ink-faint transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-red-blood">
-                    ↗
-                  </span>
-                </a>
-              </li>
+              {/* Sibling sites, rendered from NETWORK in site.ts. This list
+                  previously carried only the parent, which left the research
+                  site and the services site reachable from nowhere here. */}
+              {NETWORK.map((site) => (
+                <li key={site.href}>
+                  <a
+                    href={site.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2 font-mono text-sm text-ink-dim transition-colors hover:text-red-blood"
+                  >
+                    {site.host} — {site.blurb}
+                    <span className="text-ink-faint transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-red-blood">
+                      ↗
+                    </span>
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
