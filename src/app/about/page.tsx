@@ -16,7 +16,7 @@ const FAQ = [
   },
   {
     q: 'What will it cost?',
-    a: "Not decided. What I can say is there will be free material — the writeups and detection rules on zephryx.in already are, and that doesn't change.",
+    a: "Not decided. What I can say is there will be free material — the writeups and detection rules on writeups.zephryx.in already are, and that doesn't change. The cheatsheets here are free too.",
   },
   {
     q: 'Who is this for?',
