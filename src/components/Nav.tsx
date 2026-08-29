@@ -75,12 +75,12 @@ export default function Nav() {
               </Link>
             );
           })}
-          <a
-            href="#waitlist"
+          <Link
+            href="/cheatsheets/"
             className="clip-tab ml-2.5 flex items-baseline gap-1.5 border border-red-deep/70 bg-red-ash/25 px-3.5 py-2 font-mono text-[13px] text-red-blood transition-all duration-300 hover:bg-red-blood hover:text-void hover:shadow-[0_0_24px_-4px_rgba(255,45,75,0.7)]"
           >
-            Join waitlist
-          </a>
+            Free cheatsheets
+          </Link>
         </nav>
 
         <button
@@ -117,9 +117,9 @@ export default function Nav() {
               </span>
             </Link>
           ))}
-          <a href="#waitlist" className="py-3.5 font-mono text-sm text-red-blood">
-            Join waitlist →
-          </a>
+          <Link href="/cheatsheets/" className="py-3.5 font-mono text-sm text-red-blood">
+            Free cheatsheets →
+          </Link>
         </nav>
       </div>
     </header>

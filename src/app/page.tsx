@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { SITE, TRACKS } from '@/lib/site';
 import { getCheatsheetCount } from '@/lib/cheatsheets';
-import WaitlistForm from '@/components/WaitlistForm';
 
 const PRINCIPLES = [
   {
@@ -17,7 +16,7 @@ const PRINCIPLES = [
   {
     cmd: '03',
     title: 'Both sides of the loop',
-    body: 'Every attack track has a detection counterpart. You learn what you would leave behind and what would have caught you — which is what makes the offense worth paying for.',
+    body: 'Every attack path has a detection counterpart. You learn what you would leave behind, and what would have caught you doing it.',
   },
   {
     cmd: '04',
@@ -35,8 +34,8 @@ export default function Home() {
       <section className="relative mx-auto flex min-h-[92vh] max-w-6xl flex-col justify-center px-5 pt-24 pb-16 sm:px-8">
         <div className="reveal">
           <p className="flex items-center gap-2.5 font-mono text-[11px] tracking-[0.3em] text-ink-faint">
-            <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-warn" />
-            PRE-LAUNCH · COURSES IN DEVELOPMENT
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-signal" />
+            FREE OFFENSIVE SECURITY EDUCATION
           </p>
 
           <h1 className="mt-7 max-w-4xl font-mono text-4xl font-bold leading-[1.1] tracking-tight text-ink sm:text-6xl">
@@ -48,30 +47,30 @@ export default function Home() {
           </h1>
 
           <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-dim">
-            {SITE.name} is a hands-on offensive security training ground built by a working
-            penetration tester. Active Directory attack paths, adversary emulation, and the
+            {SITE.name} is free, hands-on offensive security and pentesting education, built by a
+            working penetration tester. Active Directory attack paths, adversary emulation, and the
             detection engineering that closes the loop — taught the way the work actually happens.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a
-              href="#waitlist"
+            <Link
+              href="/cheatsheets/"
               className="clip-tab inline-flex items-center gap-2 border border-red-deep bg-red-core px-7 py-3.5 font-mono text-sm font-medium text-void transition-all duration-300 hover:shadow-[0_0_30px_-4px_rgba(255,45,75,0.8)]"
             >
-              ./join-waitlist
-            </a>
+              Browse free cheatsheets
+            </Link>
             <Link
-              href="/tracks/"
+              href="/roadmap/"
               className="inline-flex items-center gap-2 border border-line px-7 py-3.5 font-mono text-sm text-ink-dim transition-colors duration-300 hover:border-red-deep/60 hover:text-red-blood"
             >
-              see the tracks
+              see the roadmap
               <span aria-hidden>→</span>
             </Link>
           </div>
 
-          <p className="mt-8 font-mono text-[12px] text-ink-faint">
-            <span className="text-red-blood/70">$</span> nothing is for sale yet — the waitlist is
-            how you hear first, and how I decide what to build first.
+          <p className="mt-8 text-[13px] text-ink-faint">
+            No signup, no paywall, no email required. Paid material may exist someday — that&apos;s a
+            decision for later, and it won&apos;t change what&apos;s already free here.
           </p>
         </div>
       </section>
@@ -85,12 +84,12 @@ export default function Home() {
               AVAILABLE NOW — FREE
             </p>
             <h2 className="mt-3 font-mono text-xl font-semibold text-ink sm:text-2xl">
-              {cheatsheetCount} quick-reference cheatsheets, no waitlist required
+              {cheatsheetCount} quick-reference cheatsheets, free right now
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-dim">
-              The tracks below are still being built, but the reference PDFs already are —
-              Active Directory enumeration, web app testing, network recon and more. No login, no
-              paywall, and that doesn&apos;t change when the paid courses launch.
+              The learning paths below are still being written, but the reference PDFs already
+              exist — Active Directory enumeration, web app testing, network recon and more. No
+              login, no paywall, no catch.
             </p>
           </div>
           <Link
@@ -120,7 +119,7 @@ export default function Home() {
 
       {/* -------------------------------------------------------------- tracks */}
       <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
-        <SectionHeading kicker="CURRICULUM" title="Planned tracks" />
+        <SectionHeading kicker="CURRICULUM · FREE" title="Learning paths" />
 
         <div className="mt-12 space-y-px border border-line bg-line">
           {TRACKS.map((t) => (
@@ -144,22 +143,13 @@ export default function Home() {
           ))}
         </div>
 
-        <p className="mt-6 font-mono text-[12px] text-ink-faint">
-          <span className="text-red-blood/70"># </span>
-          scope and order are still moving — the waitlist form is where you push back on it.
+        <p className="mt-6 text-[13px] text-ink-faint">
+          Scope and order are still moving. If you want a say in what gets written next, email{' '}
+          <a href={`mailto:academy@zephryx.in`} className="text-red-blood hover:underline">
+            academy@zephryx.in
+          </a>
+          .
         </p>
-      </section>
-
-      {/* ------------------------------------------------------------ waitlist */}
-      <section id="waitlist" className="mx-auto max-w-3xl scroll-mt-24 px-5 py-20 sm:px-8">
-        <SectionHeading kicker="ENROLMENT" title="Join the waitlist" />
-        <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink-dim">
-          One email when the first track opens. That is the whole commitment — no sequence, no
-          upsells, and your address goes nowhere else.
-        </p>
-        <div className="mt-10">
-          <WaitlistForm />
-        </div>
       </section>
     </>
   );
@@ -175,11 +165,11 @@ function SectionHeading({ kicker, title }: { kicker: string; title: string }) {
 }
 
 function StatusBadge({ status }: { status: string }) {
-  const dev = status === 'In development';
+  const active = status === 'Writing now';
   return (
     <span
       className={`border px-2.5 py-1 font-mono text-[10px] tracking-wider ${
-        dev ? 'border-warn/40 text-warn' : 'border-line text-ink-faint'
+        active ? 'border-signal/40 text-signal' : 'border-line text-ink-faint'
       }`}
     >
       {status.toUpperCase()}
