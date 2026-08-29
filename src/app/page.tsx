@@ -60,10 +60,10 @@ export default function Home() {
               Browse free cheatsheets
             </Link>
             <Link
-              href="/tracks/"
+              href="/roadmap/"
               className="inline-flex items-center gap-2 border border-line px-7 py-3.5 font-mono text-sm text-ink-dim transition-colors duration-300 hover:border-red-deep/60 hover:text-red-blood"
             >
-              see the learning paths
+              see the roadmap
               <span aria-hidden>→</span>
             </Link>
           </div>

@@ -48,9 +48,11 @@ export const NETWORK = [
 
 export const NAV = [
   { href: '/', label: 'Home', cmd: '~' },
-  { href: '/about/', label: 'About', cmd: 'whoami' },
+  { href: '/roadmap/', label: 'Roadmap', cmd: 'map' },
   { href: '/tracks/', label: 'Tracks', cmd: 'ls' },
   { href: '/cheatsheets/', label: 'Cheatsheets', cmd: 'find' },
+  { href: '/glossary/', label: 'Glossary', cmd: 'grep' },
+  { href: '/about/', label: 'About', cmd: 'whoami' },
 ] as const;
 
 export type Track = {

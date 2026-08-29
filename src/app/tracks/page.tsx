@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { SITE, TRACKS } from '@/lib/site';
 
 export const metadata: Metadata = {
@@ -16,7 +17,12 @@ export default function Tracks() {
       <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-ink-dim">
         Four paths, written in this order, free to read the day they publish. This page is the
         plan, kept public so you can tell me where it&apos;s wrong before I spend a month writing
-        the wrong thing.
+        the wrong thing. Not sure which one to start with, or what to do before any of them are
+        finished? The{' '}
+        <Link href="/roadmap/" className="text-red-blood hover:underline">
+          roadmap
+        </Link>{' '}
+        walks through the order and what&apos;s already free.
       </p>
 
       <div className="mt-12 space-y-px border border-line bg-line">
