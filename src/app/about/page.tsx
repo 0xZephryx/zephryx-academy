@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 
 const FAQ = [
   {
-    q: 'When does the first course open?',
-    a: "No date I'd stand behind yet. The first track is being built now, and the waitlist gets told before anything is announced publicly.",
+    q: 'What does this cost?',
+    a: "Nothing, right now. The cheatsheets and learning paths here are free — no signup, no paywall, no email required. Whether anything paid gets added later is a separate decision for another time, and it won't take anything away from what's already free.",
   },
   {
-    q: 'What will it cost?',
-    a: "Not decided. What I can say is there will be free material — the writeups and detection rules on writeups.zephryx.in already are, and that doesn't change. The cheatsheets here are free too.",
+    q: 'When does the next path publish?',
+    a: "No fixed date. Paths go up as they're finished, and the status on each one — writing now or planned — is kept honest rather than announced with a launch date I'd have to walk back.",
   },
   {
     q: 'Who is this for?',
@@ -24,7 +24,7 @@ const FAQ = [
   },
   {
     q: 'Do I need my own lab?',
-    a: "The tracks are written so you can follow along in a lab you build yourself, and the build is part of the material. Hosted labs are being considered, not promised.",
+    a: "The paths are written so you can follow along in a lab you build yourself, and the build is part of the material. Hosted labs are being considered, not promised.",
   },
 ];
 
@@ -75,17 +75,17 @@ export default function About() {
         <h2 className="font-mono text-lg font-semibold text-ink">Reach me</h2>
         <p className="mt-3 text-sm leading-relaxed text-ink-dim">
           Questions about the curriculum, corporate or group training, or anything you think the
-          tracks are missing —{' '}
+          learning paths are missing —{' '}
           <a href={`mailto:${MAILBOX.address}`} className="font-mono text-red-blood hover:underline">
             {MAILBOX.address}
           </a>
           .
         </p>
         <Link
-          href="/#waitlist"
+          href="/cheatsheets/"
           className="clip-tab mt-6 inline-flex items-center gap-2 border border-red-deep bg-red-core px-6 py-3 font-mono text-sm font-medium text-void transition-all duration-300 hover:shadow-[0_0_30px_-4px_rgba(255,45,75,0.8)]"
         >
-          ./join-waitlist
+          Browse free cheatsheets
         </Link>
       </section>
     </div>

@@ -10,9 +10,9 @@ export const SITE = {
   parentUrl: 'https://zephryx.in',
   domain: 'academy.zephryx.in',
   url: 'https://academy.zephryx.in',
-  tagline: 'Hands-on offensive security training, from the person who breaks in for a living.',
+  tagline: 'Free, hands-on offensive security education, from the person who breaks in for a living.',
   description:
-    "Zephryx Academy is a hands-on offensive security training ground — Active Directory attack paths, adversary emulation and detection engineering, taught by a working penetration tester. Courses are in development; join the waitlist to hear first.",
+    'Zephryx Academy is free offensive security and pentesting education — Active Directory attack paths, adversary emulation and detection engineering, taught by a working penetration tester. Cheatsheets, guides and labs, no paywall.',
   locale: 'en_IN',
 } as const;
 
@@ -58,9 +58,14 @@ export type Track = {
   title: string;
   summary: string;
   topics: string[];
-  status: 'In development' | 'Planned';
+  status: 'Writing now' | 'Planned';
 };
 
+/**
+ * Free learning paths — not courses for sale. Paid material may exist
+ * someday, but that is a separate, later decision; nothing here should read
+ * as a preview of it or a reason to hand over an email address first.
+ */
 export const TRACKS: Track[] = [
   {
     id: 'ad-attack-paths',
@@ -68,7 +73,7 @@ export const TRACKS: Track[] = [
     summary:
       "Kerberoasting to Golden Tickets — building and chaining the AD attack paths that show up in almost every internal engagement.",
     topics: ['Kerberoasting', 'ACL abuse', 'Delegation attacks', 'Lateral movement'],
-    status: 'In development',
+    status: 'Writing now',
   },
   {
     id: 'offensive-fundamentals',
@@ -76,7 +81,7 @@ export const TRACKS: Track[] = [
     summary:
       'Recon, enumeration and exploitation methodology for people who want the "why", not just a checklist of tools.',
     topics: ['Recon & enumeration', 'Web app exploitation', 'Privilege escalation', 'Reporting'],
-    status: 'In development',
+    status: 'Writing now',
   },
   {
     id: 'detection-engineering',

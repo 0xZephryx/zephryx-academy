@@ -3,15 +3,16 @@
 The site behind [academy.zephryx.in](https://academy.zephryx.in) — Zephryx Academy,
 a hands-on offensive security training ground.
 
-Currently pre-launch: the site is complete and live, but no course content is
-published. The waitlist is the only thing it collects.
+Free offensive security education: cheatsheets are live now, and the learning
+paths on `/tracks/` are being written in public. No waitlist, no signup, no
+paywall — whether anything paid gets added is a separate decision for later.
 
 ## Stack
 
 - **Next.js 15** (App Router), built as a fully static export to `out/`
 - **Tailwind CSS 4** via `@tailwindcss/postcss`
-- **Cloudflare Workers** serving `out/` as static assets, with `worker/index.ts`
-  handling `/api/waitlist`
+- **Cloudflare Workers** serving `out/` as static assets — `worker/index.ts`
+  has no API surface right now, it just forwards to the static assets
 
 Same shape as [zephryx.in](https://github.com/zephryxsec/zephryx.in), deployed as
 its own Worker so a bad push here can't take the main site down.
@@ -20,9 +21,9 @@ its own Worker so a bad push here can't take the main site down.
 
 ```bash
 npm install
-npm run dev          # next dev on :3000 — /api/waitlist is NOT available here
+npm run dev          # next dev on :3000
 npm run build        # static export to out/
-npm run preview      # build + wrangler dev — the full stack, API included
+npm run preview      # build + wrangler dev — the full stack
 ```
 
 `npm run lint` is not usable (no ESLint config; `next lint` drops into an
@@ -30,8 +31,8 @@ interactive setup prompt). Use `npx tsc --noEmit` plus `npm run build`.
 
 ## Deploying
 
-See [DEPLOY.md](DEPLOY.md) for first-time Cloudflare setup — the custom domain,
-the secrets the waitlist endpoint needs, and the optional KV namespaces.
+See [DEPLOY.md](DEPLOY.md) for first-time Cloudflare setup — the custom domain
+and verification steps.
 
 ```bash
 npm run deploy       # build + wrangler deploy

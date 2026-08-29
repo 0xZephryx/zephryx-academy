@@ -4,17 +4,29 @@ Next.js 15 App Router, static export (`out/`) served by Cloudflare Workers.
 Sibling of `zephryx.in` and deliberately a separate Worker — the two deploy
 independently so a bad push here can't take the main site down.
 
-This is still **pre-launch** for the paid tracks: no course content is
-published and the waitlist is the only thing that collects a lead. The one
-exception is `/cheatsheets/` — free quick-reference PDFs, migrated over from
-`zephryx.in` so all study material lives on this domain. Free stays free; that
-migration is not a preview of the paid tracks.
+**No waitlist, no paid tracks, no lead capture.** That was the earlier
+posture; it was deliberately removed. This site is free offensive security and
+pentesting education, full stop, for now. `/cheatsheets/` is the free
+quick-reference PDF library (migrated over from `zephryx.in` so all study
+material lives on this domain), and `/tracks/` is the in-progress free
+curriculum. Whether paid material gets added later is a real, separate
+decision that hasn't been made — do not reintroduce a waitlist, a "coming
+soon, join to hear first" framing, or any pricing/plan copy speculatively.
+When that decision is made, it'll be made explicitly, here.
+
+There is currently **no attack surface**: the site accepts no input anywhere.
+`worker/index.ts` does nothing but forward every request to the static
+assets. If a form or endpoint gets added back, give it the same layered
+treatment the old waitlist handler had (same-origin check, size caps, a
+honeypot, DNS check on any email domain) — that discipline was correct, it's
+just unused right now.
 
 ## Where things live
 
 - `src/lib/site.ts` is the single source of truth for identity, nav and the
-  track list. Nothing else should hardcode a link, an email address or a course
-  name. Announcing a track as open is a `status` change in that file.
+  track list. Nothing else should hardcode a link, an email address or a
+  track name. `TRACKS[].status` is `'Writing now'` or `'Planned'` — never a
+  price, a plan tier, or "open"/"closed" language that implies payment.
 - `content/cheatsheets/` + `src/lib/cheatsheets.ts` are the cheatsheets
   pipeline, ported from `zephryx.in`'s: frontmatter-only `.md` files, each
   naming a PDF under `public/cheatsheets/`. The build throws if a cheatsheet's
@@ -23,27 +35,17 @@ migration is not a preview of the paid tracks.
   standalone client filter (category + local text match); it does not pull in
   `zephryx.in`'s cross-content search machinery, because this site has no
   writeups or detections to cross-link against.
-- `worker/index.ts` handles `/api/waitlist` and nothing else; every other
-  request falls through to the static assets.
 - `public/_headers` carries the CSP and the rest of the security headers,
   applied at the edge because a static export has no server to set them.
 
-## The waitlist endpoint is the only attack surface — keep it that way
+## Visual tone: premium, not a terminal emulator
 
-It is the sole piece of this site that accepts input, so the layers matter:
-same-origin check, body-size cap, per-field caps, honeypot, submission
-time-trap, DNS check on the email domain, optional KV rate limit. If you extend
-it, keep all of them and mirror any new caps in `WaitlistForm.tsx` so the client
-fails fast and identically.
-
-Two rules worth stating outright:
-
-- **Store before you notify.** A signup persisted to KV is the durable record;
-  the email is a notification. A Resend outage must not lose someone who signed
-  up, which is why the handler returns success when the KV write succeeded even
-  if the mail failed.
-- **Never reflect a secret or an upstream error to the client.** Generic message
-  to the visitor, detail to `console.error`.
+The dark base + red accent + monospace kicker labels are the brand and stay.
+What doesn't belong is anything that reads as a literal terminal widget —
+fake shell prompts (`$ ./cmd`), traffic-light window chrome, blinking
+cursors standing in for a console. The old waitlist form had exactly that
+(a fake `zephryx@academy — ./enroll` title bar); it's gone with the form.
+Keep the technical identity in typography and structure, not in cosplay.
 
 ## Other things worth knowing
 

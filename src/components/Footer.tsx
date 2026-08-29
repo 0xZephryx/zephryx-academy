@@ -82,8 +82,8 @@ export default function Footer() {
         <div className="mt-10 flex flex-col gap-3 border-t border-line/60 pt-6 font-mono text-[11px] text-ink-faint sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} {SITE.parentName}. All rights reserved.</p>
           <p className="flex items-center gap-2">
-            <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-warn" />
-            status: pre-launch — courses in development
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-signal" />
+            status: free education, live now
           </p>
         </div>
       </div>

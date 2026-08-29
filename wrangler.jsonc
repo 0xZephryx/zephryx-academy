@@ -3,10 +3,6 @@
   "name": "zephryx-academy",
   "main": "worker/index.ts",
   "compatibility_date": "2026-08-06",
-  "vars": {
-    "WAITLIST_TO": "academy@zephryx.in",
-    "WAITLIST_FROM": "Zephryx Academy <noreply@mail.zephryx.in>"
-  },
 
   // The public address, pinned here rather than left as dashboard-only state,
   // so the hostname the training site answers on is reproducible from this repo.
@@ -39,10 +35,6 @@
     "run_worker_first": true,
     "not_found_handling": "404-page"
   },
-  "kv_namespaces": [
-    { "binding": "WAITLIST", "id": "970921fe9dd14f6e9458799bfc78343e" },
-    { "binding": "WAITLIST_RL", "id": "f1d6f7091b2a4fd6831cac0b8a7558b1" }
-  ],
   "observability": {
     "enabled": true
   }
