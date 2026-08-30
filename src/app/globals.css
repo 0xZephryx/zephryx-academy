@@ -32,6 +32,7 @@
   --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-drift: drift 24s ease-in-out infinite alternate;
   --animate-blink: blink 1.05s step-end infinite;
+  --animate-marquee: marquee 38s linear infinite;
 }
 
 :root {
@@ -53,6 +54,10 @@
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 @keyframes rise {
   from { opacity: 0; transform: translateY(18px); }
