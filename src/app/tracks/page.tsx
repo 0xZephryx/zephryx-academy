@@ -1,24 +1,24 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { SITE, TRACKS } from '@/lib/site';
+import { SITE, COURSES } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Learning Paths',
+  title: 'Courses',
   description:
-    'The free Zephryx Academy curriculum — Active Directory attack paths, offensive security fundamentals, detection engineering and practical labs.',
+    'The free Zephryx Academy course catalog — beginner-first, from Linux & networking foundations through Active Directory attack paths and detection engineering.',
   alternates: { canonical: `${SITE.url}/tracks/` },
 };
 
-export default function Tracks() {
+export default function CoursesPage() {
   return (
     <div className="mx-auto max-w-4xl px-5 pt-32 pb-16 sm:px-8">
       <p className="font-mono text-[11px] tracking-[0.3em] text-red-blood/70">CURRICULUM · FREE</p>
-      <h1 className="mt-3 font-mono text-4xl font-bold tracking-tight text-ink sm:text-5xl">Learning paths</h1>
+      <h1 className="mt-3 font-mono text-4xl font-bold tracking-tight text-ink sm:text-5xl">Courses</h1>
       <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-ink-dim">
-        Four paths, written in this order, free to read the day they publish. This page is the
-        plan, kept public so you can tell me where it&apos;s wrong before I spend a month writing
-        the wrong thing. Not sure which one to start with, or what to do before any of them are
-        finished? The{' '}
+        Ordered beginner to advanced, and written in that same order — free to read the day each
+        one publishes. This page is the plan, kept public so you can tell me where it&apos;s wrong
+        before I spend a month writing the wrong thing. Not sure which one to start with, or what
+        to do before any of them are finished? The{' '}
         <Link href="/roadmap/" className="text-red-blood hover:underline">
           roadmap
         </Link>{' '}
@@ -26,29 +26,30 @@ export default function Tracks() {
       </p>
 
       <div className="mt-12 space-y-px border border-line bg-line">
-        {TRACKS.map((t, i) => (
-          <article key={t.id} className="bg-surface p-7">
+        {COURSES.map((c, i) => (
+          <article key={c.id} className="bg-surface p-7">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
               <div className="flex items-baseline gap-3">
                 <span className="font-mono text-[11px] tracking-[0.3em] text-red-blood/70">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <h2 className="font-mono text-xl font-semibold text-ink">{t.title}</h2>
+                <h2 className="font-mono text-xl font-semibold text-ink">{c.title}</h2>
+                <span className="font-mono text-[11px] tracking-[0.3em] text-ink-faint">{c.level.toUpperCase()}</span>
               </div>
               <span
                 className={`border px-2.5 py-1 font-mono text-[10px] tracking-wider ${
-                  t.status === 'Writing now' ? 'border-signal/40 text-signal' : 'border-line text-ink-faint'
+                  c.status === 'Writing now' ? 'border-signal/40 text-signal' : 'border-line text-ink-faint'
                 }`}
               >
-                {t.status.toUpperCase()}
+                {c.status.toUpperCase()}
               </span>
             </div>
 
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink-dim">{t.summary}</p>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink-dim">{c.summary}</p>
 
             <h3 className="mt-6 font-mono text-[11px] tracking-[0.3em] text-ink-faint">COVERS</h3>
             <ul className="mt-3 flex flex-wrap gap-2">
-              {t.topics.map((topic) => (
+              {c.topics.map((topic) => (
                 <li
                   key={topic}
                   className="border border-line bg-void/60 px-2.5 py-1 font-mono text-[11px] text-ink-faint"
