@@ -63,7 +63,7 @@ export default function GlossaryIndex({ terms }: { terms: GlossaryTerm[] }) {
             aria-label="Search glossary"
             spellCheck={false}
             autoComplete="off"
-            className="w-full border border-line bg-void/60 py-2 pl-6 pr-3 font-mono text-[13px] text-ink placeholder:text-ink-faint focus:border-red-deep/70 focus:outline-none"
+            className="w-full border border-line bg-void/60 py-2 pl-6 pr-3 font-mono text-[13px] text-ink placeholder:text-ink-faint focus:border-red-deep/70"
           />
         </label>
       </div>
