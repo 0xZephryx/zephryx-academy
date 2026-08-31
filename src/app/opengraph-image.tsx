@@ -52,8 +52,8 @@ export default function OgImage() {
             marginBottom: 30,
           }}
         >
-          <div style={{ width: 9, height: 9, borderRadius: 999, background: '#ffb020', display: 'flex' }} />
-          PRE-LAUNCH · COURSES IN DEVELOPMENT
+          <div style={{ width: 9, height: 9, borderRadius: 999, background: '#29d391', display: 'flex' }} />
+          FREE OFFENSIVE SECURITY EDUCATION
         </div>
 
         <div

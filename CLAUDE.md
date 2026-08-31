@@ -8,11 +8,21 @@ independently so a bad push here can't take the main site down.
 posture; it was deliberately removed. This site is free offensive security and
 pentesting education, full stop, for now. `/cheatsheets/` is the free
 quick-reference PDF library (migrated over from `zephryx.in` so all study
-material lives on this domain), and `/tracks/` is the in-progress free
-curriculum. Whether paid material gets added later is a real, separate
-decision that hasn't been made — do not reintroduce a waitlist, a "coming
-soon, join to hear first" framing, or any pricing/plan copy speculatively.
-When that decision is made, it'll be made explicitly, here.
+material lives on this domain).
+
+A structured course catalog (`/tracks/`, the `COURSES` array in `site.ts`,
+a "Courses" nav entry) existed briefly and was removed — the courses were
+mostly unwritten ("Planned"/"Writing now" placeholders), and having a page
+that only half-delivered on that promise did more harm than not having the
+page. `/roadmap/` stays: it still lays out the learning order stage by
+stage, but each stage now points only at cheatsheets, never at a course.
+Don't add a `courseId`/course link back onto a `Stage` in `roadmap/page.tsx`
+without also bringing the course content itself. Whether a course catalog
+comes back, and whether any of it is ever paid, are both real, separate
+decisions that haven't been made — do not reintroduce a waitlist, a "coming
+soon, join to hear first" framing, a `/tracks/` route, or any pricing/plan
+copy speculatively. When either decision is made, it'll be made explicitly,
+here.
 
 There is currently **no attack surface**: the site accepts no input anywhere.
 `worker/index.ts` does nothing but forward every request to the static
@@ -23,9 +33,10 @@ just unused right now.
 
 ## Where things live
 
-- `src/lib/site.ts` is the single source of truth for identity, nav and the
-  track list. Nothing else should hardcode a link, an email address or a
-  track name. `TRACKS[].status` is `'Writing now'` or `'Planned'` — never a
+- `src/lib/site.ts` is the single source of truth for identity and nav.
+  Nothing else should hardcode a link or an email address. There is no
+  course/track list here anymore (see above) — if one comes back, keep the
+  same discipline: a status of `'Writing now'` or `'Planned'`, never a
   price, a plan tier, or "open"/"closed" language that implies payment.
 - `content/cheatsheets/` + `src/lib/cheatsheets.ts` are the cheatsheets
   pipeline, ported from `zephryx.in`'s: frontmatter-only `.md` files, each
