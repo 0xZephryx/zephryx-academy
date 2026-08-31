@@ -5,18 +5,14 @@ import { MAILBOX, SITE } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'About',
   description:
-    "Who teaches at Zephryx Academy, what the courses cover, and the rules the training is built on — hands-on offensive security from a working penetration tester.",
+    "Who teaches at Zephryx Academy, what the training covers, and the rules it's built on — hands-on offensive security from a working penetration tester.",
   alternates: { canonical: `${SITE.url}/about/` },
 };
 
 const FAQ = [
   {
     q: 'What does this cost?',
-    a: "Nothing, right now. The cheatsheets and learning paths here are free — no signup, no paywall, no email required. Whether anything paid gets added later is a separate decision for another time, and it won't take anything away from what's already free.",
-  },
-  {
-    q: 'When does the next path publish?',
-    a: "No fixed date. Paths go up as they're finished, and the status on each one — writing now or planned — is kept honest rather than announced with a launch date I'd have to walk back.",
+    a: "Nothing, right now. The cheatsheets here are free — no signup, no paywall, no email required. Whether anything paid gets added later is a separate decision for another time, and it won't take anything away from what's already free.",
   },
   {
     q: 'Who is this for?',
@@ -24,7 +20,7 @@ const FAQ = [
   },
   {
     q: 'Do I need my own lab?',
-    a: "The paths are written so you can follow along in a lab you build yourself, and the build is part of the material. Hosted labs are being considered, not promised.",
+    a: "Yes — the roadmap is written around a lab you build yourself, and the build is part of the material. Hosted labs are being considered, not promised.",
   },
 ];
 
