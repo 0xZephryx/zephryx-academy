@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllCheatsheets } from '@/lib/cheatsheets';
 import { SITE } from '@/lib/site';
+import RoadmapPath from '@/components/RoadmapPath';
 
 export const metadata: Metadata = {
   title: 'Roadmap',
@@ -74,8 +75,21 @@ export default function RoadmapPage() {
   const cheatsheets = getAllCheatsheets();
   const cheatsheetBySlug = new Map(cheatsheets.map((c) => [c.slug, c]));
 
+  const stages = STAGES.map((s) => ({
+    n: s.n,
+    title: s.title,
+    summary: s.summary,
+    learn: s.learn,
+    practice: s.practice,
+    cheatsheets: (s.cheatsheetSlugs ?? []).map((slug) => {
+      const c = cheatsheetBySlug.get(slug);
+      if (!c) throw new Error(`Roadmap references unknown cheatsheet slug "${slug}"`);
+      return { title: c.title, file: c.file };
+    }),
+  }));
+
   return (
-    <div className="mx-auto max-w-4xl px-5 pt-32 pb-16 sm:px-8">
+    <div className="mx-auto max-w-6xl px-5 pt-32 pb-16 sm:px-8">
       <p className="font-mono text-[11px] tracking-[0.3em] text-red-blood/70">GUIDE</p>
       <h1 className="mt-3 font-mono text-4xl font-bold tracking-tight text-ink sm:text-5xl">Roadmap</h1>
       <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-ink-dim">
@@ -84,61 +98,24 @@ export default function RoadmapPage() {
         come back to it if a later one stops making sense.
       </p>
 
-      <ol className="mt-12 space-y-px border border-line bg-line">
-        {STAGES.map((s) => {
-          const sheets = (s.cheatsheetSlugs ?? []).map((slug) => {
-            const c = cheatsheetBySlug.get(slug);
-            if (!c) throw new Error(`Roadmap references unknown cheatsheet slug "${slug}"`);
-            return c;
-          });
+      <div className="mt-7 flex w-fit flex-wrap gap-x-6 gap-y-2 border border-line bg-abyss px-4 py-3 font-mono text-[11px] text-ink-faint">
+        <span className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-sm bg-signal" />
+          free cheatsheet live for this stage
+        </span>
+        <span className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-sm border border-ink-faint" />
+          no free resource here yet
+        </span>
+      </div>
 
-          return (
-            <li key={s.n} className="bg-surface p-7">
-              <div className="flex items-baseline gap-3">
-                <span className="font-mono text-[11px] tracking-[0.3em] text-red-blood/70">{s.n}</span>
-                <h2 className="font-mono text-xl font-semibold text-ink">{s.title}</h2>
-              </div>
+      <div className="mt-6">
+        <RoadmapPath stages={stages} />
+      </div>
 
-              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink-dim">{s.summary}</p>
-
-              <h3 className="mt-6 font-mono text-[11px] tracking-[0.3em] text-ink-faint">WHAT YOU&apos;LL LEARN</h3>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {s.learn.map((topic) => (
-                  <li key={topic} className="border border-line bg-void/60 px-2.5 py-1 font-mono text-[11px] text-ink-faint">
-                    {topic}
-                  </li>
-                ))}
-              </ul>
-
-              {sheets.length > 0 ? (
-                <div className="mt-6">
-                  <h3 className="font-mono text-[11px] tracking-[0.3em] text-ink-faint">FREE RIGHT NOW</h3>
-                  <ul className="mt-3 space-y-2">
-                    {sheets.map((c) => (
-                      <li key={c.slug}>
-                        <a
-                          href={`/cheatsheets/${c.file}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-mono text-sm text-red-blood hover:underline"
-                        >
-                          {c.title} ↗
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-
-              {s.practice ? <p className="mt-6 text-sm leading-relaxed text-ink-dim">{s.practice}</p> : null}
-            </li>
-          );
-        })}
-      </ol>
-
-      <section className="panel clip-corner mt-14 p-7">
+      <section className="panel clip-corner mx-auto mt-8 max-w-xl p-7">
         <h2 className="font-mono text-lg font-semibold text-ink">Not sure what a term means?</h2>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-dim">
+        <p className="mt-3 text-sm leading-relaxed text-ink-dim">
           The glossary has plain-language definitions for anything above that reads as jargon —
           Kerberoasting, ACLs, Sigma, all of it.
         </p>
