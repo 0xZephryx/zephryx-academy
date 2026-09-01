@@ -49,13 +49,13 @@ export const NETWORK = [
 export const NAV = [
   { href: '/', label: 'Home', cmd: '~' },
   { href: '/roadmap/', label: 'Roadmap', cmd: 'map' },
-  { href: '/tracks/', label: 'Courses', cmd: 'ls' },
+  { href: '/tracks/', label: 'Tracks', cmd: 'ls' },
   { href: '/cheatsheets/', label: 'Cheatsheets', cmd: 'find' },
   { href: '/glossary/', label: 'Glossary', cmd: 'grep' },
   { href: '/about/', label: 'About', cmd: 'whoami' },
 ] as const;
 
-export type Course = {
+export type Track = {
   id: string;
   title: string;
   summary: string;
@@ -65,12 +65,12 @@ export type Course = {
 };
 
 /**
- * Free courses, ordered the way they're meant to be taken — and written —
+ * The free curriculum, ordered the way it's meant to be taken — and written —
  * beginner first. Paid material may exist someday, but that is a separate,
  * later decision; nothing here should read as a preview of it or a reason to
  * hand over an email address first.
  */
-export const COURSES: Course[] = [
+export const TRACKS: Track[] = [
   {
     id: 'linux-networking-foundations',
     title: 'Linux & Networking Foundations',

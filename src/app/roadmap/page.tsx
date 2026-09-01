@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllCheatsheets } from '@/lib/cheatsheets';
-import { SITE, COURSES, type Course } from '@/lib/site';
+import { SITE, TRACKS, type Track } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Roadmap',
@@ -10,10 +10,10 @@ export const metadata: Metadata = {
   alternates: { canonical: `${SITE.url}/roadmap/` },
 };
 
-const courseById = (id: string): Course => {
-  const c = COURSES.find((x) => x.id === id);
-  if (!c) throw new Error(`Roadmap references unknown course id "${id}"`);
-  return c;
+const trackById = (id: string): Track => {
+  const t = TRACKS.find((x) => x.id === id);
+  if (!t) throw new Error(`Roadmap references unknown track id "${id}"`);
+  return t;
 };
 
 type Stage = {
@@ -22,7 +22,7 @@ type Stage = {
   summary: string;
   learn: string[];
   cheatsheetSlugs?: string[];
-  courseId?: string;
+  trackId?: string;
   practice?: string;
 };
 
@@ -42,7 +42,7 @@ const STAGES: Stage[] = [
       'Every engagement starts here. What is actually running, on what port, with what version — and what that tells you about where to look next.',
     learn: ['Host discovery', 'Port & service scanning', 'Service/version fingerprinting', 'Reading scan output, not just running the scan'],
     cheatsheetSlugs: ['nmap-network-recon-quick-reference'],
-    courseId: 'offensive-fundamentals',
+    trackId: 'offensive-fundamentals',
   },
   {
     n: '02',
@@ -51,7 +51,7 @@ const STAGES: Stage[] = [
       'The most common thing exposed to the internet, and the most common way in. Learn the methodology, then the tool, in that order — Burp finds what you already know to look for.',
     learn: ['Auth & session handling', 'Access control / IDOR', 'Injection classes', 'Intercepting & replaying requests'],
     cheatsheetSlugs: ['web-app-pentest-checklist', 'burp-suite-field-guide-quick-reference'],
-    courseId: 'offensive-fundamentals',
+    trackId: 'offensive-fundamentals',
   },
   {
     n: '03',
@@ -60,7 +60,7 @@ const STAGES: Stage[] = [
       'Where most internal engagements are actually won. This is the deepest stage on purpose — Kerberos, ACLs and delegation reward the time you put in more than anything else here.',
     learn: ['Unauthenticated & authenticated AD enumeration', 'Kerberoasting & AS-REP Roasting', 'ACL & delegation abuse', 'Credential dumping & lateral movement'],
     cheatsheetSlugs: ['windows-active-directory-enumeration'],
-    courseId: 'ad-attack-paths',
+    trackId: 'ad-attack-paths',
   },
   {
     n: '04',
@@ -68,7 +68,7 @@ const STAGES: Stage[] = [
     summary:
       "The half almost nobody teaches. For everything above, ask what it would have left behind — then write the rule that catches it. An operator who can answer that is worth more than one who can't.",
     learn: ['Log sources per technique', 'Writing a Sigma rule', 'Mapping to MITRE ATT&CK', 'Tuning against false positives'],
-    courseId: 'detection-engineering',
+    trackId: 'detection-engineering',
   },
   {
     n: '05',
@@ -76,9 +76,9 @@ const STAGES: Stage[] = [
     summary:
       "Knowledge that hasn't been tested against something that fights back isn't worth much yet. Run the full loop end to end, then write it up like it's for someone else to read.",
     learn: ['Guided, objective-based boxes', 'Chaining techniques instead of running them in isolation', 'Writing a report someone would act on'],
-    courseId: 'ctf-labs',
+    trackId: 'ctf-labs',
     practice:
-      "For what a finished writeup looks like, read the real ones on writeups.zephryx.in. Hosted, guided labs are planned for labs.zephryx.in — not live yet, so for now this stage means building the lab yourself and running the loop end to end.",
+      "For what a finished writeup looks like, read the real ones on writeups.zephryx.in. Hosted, guided labs aren't live yet — that's a real possibility later, not a promise — so for now this stage means building the lab yourself and running the loop end to end.",
   },
 ];
 
@@ -99,7 +99,7 @@ export default function RoadmapPage() {
 
       <ol className="mt-12 space-y-px border border-line bg-line">
         {STAGES.map((s) => {
-          const course = s.courseId ? courseById(s.courseId) : undefined;
+          const track = s.trackId ? trackById(s.trackId) : undefined;
           const sheets = (s.cheatsheetSlugs ?? []).map((slug) => {
             const c = cheatsheetBySlug.get(slug);
             if (!c) throw new Error(`Roadmap references unknown cheatsheet slug "${slug}"`);
@@ -144,13 +144,13 @@ export default function RoadmapPage() {
                 </div>
               ) : null}
 
-              {course ? (
+              {track ? (
                 <p className="mt-6 text-sm leading-relaxed text-ink-dim">
                   Goes deeper in{' '}
                   <Link href="/tracks/" className="text-red-blood hover:underline">
-                    {course.title}
+                    {track.title}
                   </Link>{' '}
-                  <span className="font-mono text-[11px] text-ink-faint">({course.status.toLowerCase()})</span>.
+                  <span className="font-mono text-[11px] text-ink-faint">({track.status.toLowerCase()})</span>.
                 </p>
               ) : null}
 

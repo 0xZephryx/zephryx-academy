@@ -53,7 +53,7 @@ export default function OgImage() {
           }}
         >
           <div style={{ width: 9, height: 9, borderRadius: 999, background: '#ffb020', display: 'flex' }} />
-          PRE-LAUNCH · COURSES IN DEVELOPMENT
+          PRE-LAUNCH · TRACKS IN DEVELOPMENT
         </div>
 
         <div

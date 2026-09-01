@@ -18,3 +18,15 @@ export function formatBytes(bytes: number): string {
   const value = bytes / 1024 ** exp;
   return `${exp === 0 ? value : value.toFixed(1)} ${units[exp]}`;
 }
+
+/**
+ * Trims to the last full word within `max` characters and appends an
+ * ellipsis — unlike CSS `line-clamp`, which cuts mid-word wherever the Nth
+ * line happens to end, regardless of the character it lands on.
+ */
+export function truncateWords(text: string, max: number): string {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  const lastSpace = cut.lastIndexOf(' ');
+  return `${(lastSpace > 0 ? cut.slice(0, lastSpace) : cut).trimEnd()}…`;
+}

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { SITE, COURSES } from '@/lib/site';
+import { SITE, TRACKS, MAILBOX } from '@/lib/site';
 import { getCheatsheetCount } from '@/lib/cheatsheets';
 
 const PRINCIPLES = [
@@ -117,16 +117,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ------------------------------------------------------------- courses */}
+      {/* ------------------------------------------------------------- tracks */}
       <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
-        <SectionHeading kicker="CURRICULUM · FREE" title="Courses" />
+        <SectionHeading kicker="CURRICULUM · FREE" title="Tracks" />
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink-dim">
           Beginner first, on purpose. The order below is both how I&apos;d take them and the order
           they&apos;re getting written in.
         </p>
 
         <div className="mt-12 space-y-px border border-line bg-line">
-          {COURSES.slice(0, 4).map((c) => (
+          {TRACKS.slice(0, 4).map((c) => (
             <article key={c.id} className="bg-surface p-7">
               <div className="flex flex-wrap items-baseline justify-between gap-3">
                 <div className="flex items-baseline gap-3">
@@ -152,12 +152,12 @@ export default function Home() {
 
         <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
           <Link href="/tracks/" className="font-mono text-sm text-red-blood hover:underline">
-            See all {COURSES.length} courses →
+            See all {TRACKS.length} tracks →
           </Link>
           <p className="text-[13px] text-ink-faint">
             Scope and order are still moving. If you want a say in what gets written next, email{' '}
-            <a href={`mailto:academy@zephryx.in`} className="text-red-blood hover:underline">
-              academy@zephryx.in
+            <a href={`mailto:${MAILBOX.address}`} className="text-red-blood hover:underline">
+              {MAILBOX.address}
             </a>
             .
           </p>

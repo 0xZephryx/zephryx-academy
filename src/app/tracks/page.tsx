@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { SITE, COURSES } from '@/lib/site';
+import { SITE, TRACKS, MAILBOX } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Courses',
+  title: 'Tracks',
   description:
-    'The free Zephryx Academy course catalog — beginner-first, from Linux & networking foundations through Active Directory attack paths and detection engineering.',
+    'The free Zephryx Academy curriculum — beginner-first, from Linux & networking foundations through Active Directory attack paths and detection engineering.',
   alternates: { canonical: `${SITE.url}/tracks/` },
 };
 
-export default function CoursesPage() {
+export default function TracksPage() {
   return (
     <div className="mx-auto max-w-4xl px-5 pt-32 pb-16 sm:px-8">
       <p className="font-mono text-[11px] tracking-[0.3em] text-red-blood/70">CURRICULUM · FREE</p>
-      <h1 className="mt-3 font-mono text-4xl font-bold tracking-tight text-ink sm:text-5xl">Courses</h1>
+      <h1 className="mt-3 font-mono text-4xl font-bold tracking-tight text-ink sm:text-5xl">Tracks</h1>
       <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-ink-dim">
         Ordered beginner to advanced, and written in that same order — free to read the day each
         one publishes. This page is the plan, kept public so you can tell me where it&apos;s wrong
@@ -26,7 +26,7 @@ export default function CoursesPage() {
       </p>
 
       <div className="mt-12 space-y-px border border-line bg-line">
-        {COURSES.map((c, i) => (
+        {TRACKS.map((c, i) => (
           <article key={c.id} className="bg-surface p-7">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
               <div className="flex items-baseline gap-3">
@@ -69,10 +69,10 @@ export default function CoursesPage() {
           order.
         </p>
         <a
-          href="mailto:academy@zephryx.in"
+          href={`mailto:${MAILBOX.address}`}
           className="clip-tab mt-6 inline-flex items-center gap-2 border border-red-deep bg-red-core px-6 py-3 font-mono text-sm font-medium text-void transition-all duration-300 hover:shadow-[0_0_30px_-4px_rgba(255,45,75,0.8)]"
         >
-          academy@zephryx.in
+          {MAILBOX.address}
         </a>
       </section>
     </div>
