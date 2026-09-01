@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { SITE, TRACKS, MAILBOX } from '@/lib/site';
+import { SITE } from '@/lib/site';
 import { getCheatsheetCount } from '@/lib/cheatsheets';
 
 const PRINCIPLES = [
@@ -116,53 +116,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      {/* ------------------------------------------------------------- tracks */}
-      <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
-        <SectionHeading kicker="CURRICULUM · FREE" title="Tracks" />
-        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink-dim">
-          Beginner first, on purpose. The order below is both how I&apos;d take them and the order
-          they&apos;re getting written in.
-        </p>
-
-        <div className="mt-12 space-y-px border border-line bg-line">
-          {TRACKS.slice(0, 4).map((c) => (
-            <article key={c.id} className="bg-surface p-7">
-              <div className="flex flex-wrap items-baseline justify-between gap-3">
-                <div className="flex items-baseline gap-3">
-                  <h3 className="font-mono text-lg font-semibold text-ink">{c.title}</h3>
-                  <span className="font-mono text-[11px] tracking-[0.3em] text-ink-faint">{c.level.toUpperCase()}</span>
-                </div>
-                <StatusBadge status={c.status} />
-              </div>
-              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ink-dim">{c.summary}</p>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {c.topics.map((topic) => (
-                  <li
-                    key={topic}
-                    className="border border-line bg-void/60 px-2.5 py-1 font-mono text-[11px] text-ink-faint"
-                  >
-                    {topic}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-          <Link href="/tracks/" className="font-mono text-sm text-red-blood hover:underline">
-            See all {TRACKS.length} tracks →
-          </Link>
-          <p className="text-[13px] text-ink-faint">
-            Scope and order are still moving. If you want a say in what gets written next, email{' '}
-            <a href={`mailto:${MAILBOX.address}`} className="text-red-blood hover:underline">
-              {MAILBOX.address}
-            </a>
-            .
-          </p>
-        </div>
-      </section>
     </>
   );
 }
@@ -173,18 +126,5 @@ function SectionHeading({ kicker, title }: { kicker: string; title: string }) {
       <p className="font-mono text-[11px] tracking-[0.3em] text-red-blood/70">{kicker}</p>
       <h2 className="mt-3 font-mono text-3xl font-bold tracking-tight text-ink sm:text-4xl">{title}</h2>
     </div>
-  );
-}
-
-function StatusBadge({ status }: { status: string }) {
-  const active = status === 'Writing now';
-  return (
-    <span
-      className={`border px-2.5 py-1 font-mono text-[10px] tracking-wider ${
-        active ? 'border-signal/40 text-signal' : 'border-line text-ink-faint'
-      }`}
-    >
-      {status.toUpperCase()}
-    </span>
   );
 }

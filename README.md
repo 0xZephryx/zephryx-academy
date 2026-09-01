@@ -14,7 +14,7 @@ paywall — whether anything paid gets added is a separate decision for later.
 - **Cloudflare Workers** serving `out/` as static assets — `worker/index.ts`
   has no API surface right now, it just forwards to the static assets
 
-Same shape as [zephryx.in](https://github.com/zephryxsec/zephryx.in), deployed as
+Same shape as [zephryx.in](https://github.com/iamzephryx/zephryx.in), deployed as
 its own Worker so a bad push here can't take the main site down.
 
 ## Local development
