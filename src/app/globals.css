@@ -31,7 +31,6 @@
 
   --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-drift: drift 24s ease-in-out infinite alternate;
-  --animate-blink: blink 1.05s step-end infinite;
 }
 
 :root {
@@ -49,10 +48,6 @@
 @keyframes drift {
   from { transform: translate3d(0, 0, 0) scale(1); }
   to { transform: translate3d(2%, -3%, 0) scale(1.08); }
-}
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
 }
 @keyframes rise {
   from { opacity: 0; transform: translateY(18px); }

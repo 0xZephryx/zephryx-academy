@@ -1,8 +1,9 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { formatDate, formatBytes } from '@/lib/format';
+import { formatDate, formatBytes, truncateWords } from '@/lib/format';
 import { CHEATSHEET_CATEGORIES, type Cheatsheet } from '@/lib/cheatsheetTypes';
+import { MAILBOX } from '@/lib/site';
 
 const CATEGORIES = ['All', ...CHEATSHEET_CATEGORIES] as const;
 
@@ -68,7 +69,7 @@ export default function CheatsheetsIndex({ cheatsheets }: { cheatsheets: Cheatsh
             aria-label="Search cheatsheets"
             spellCheck={false}
             autoComplete="off"
-            className="w-full border border-line bg-void/60 py-2 pl-6 pr-3 font-mono text-[13px] text-ink placeholder:text-ink-faint focus:border-red-deep/70 focus:outline-none"
+            className="w-full border border-line bg-void/60 py-2 pl-6 pr-3 font-mono text-[13px] text-ink placeholder:text-ink-faint focus:border-red-deep/70"
           />
         </label>
       </div>
@@ -102,7 +103,7 @@ export default function CheatsheetsIndex({ cheatsheets }: { cheatsheets: Cheatsh
                 {c.title}
               </h2>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-dim line-clamp-3">
-                {c.excerpt}
+                {truncateWords(c.excerpt, 160)}
               </p>
               <div className="mt-5 flex flex-wrap gap-1.5">
                 {c.tags.slice(0, 3).map((t) => (
@@ -119,6 +120,18 @@ export default function CheatsheetsIndex({ cheatsheets }: { cheatsheets: Cheatsh
               </div>
             </a>
           ))}
+          {category === 'All' && query === '' ? (
+            <div className="flex h-full flex-col items-start justify-center border border-dashed border-line p-6 text-ink-faint">
+              <p className="font-mono text-sm">More cheatsheets are on the way.</p>
+              <p className="mt-2 text-sm leading-relaxed">
+                Email{' '}
+                <a href={`mailto:${MAILBOX.address}`} className="text-red-blood hover:underline">
+                  {MAILBOX.address}
+                </a>{' '}
+                if there&apos;s a topic you want covered sooner.
+              </p>
+            </div>
+          ) : null}
         </div>
       ) : (
         <div className="panel clip-corner p-12 text-center">

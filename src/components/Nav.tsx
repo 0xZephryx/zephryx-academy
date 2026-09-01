@@ -24,11 +24,31 @@ export default function Nav() {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
+  // Lock page scroll behind the drawer while it's open so it reads as a
+  // modal, not a dropdown — otherwise the page scrolls underneath it.
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href.replace(/\/$/, ''));
 
   return (
-    <header
+    <>
+      {/* backdrop — closes the drawer on outside click, blocks the page behind it */}
+      {open ? (
+        <div
+          className="fixed inset-x-0 bottom-0 top-16 z-40 bg-void/60 backdrop-blur-sm lg:hidden"
+          onClick={() => setOpen(false)}
+          aria-hidden
+        />
+      ) : null}
+      <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         scrolled
           ? 'border-b border-line/80 bg-void/80 backdrop-blur-xl'
@@ -102,11 +122,12 @@ export default function Nav() {
           open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <nav className="flex flex-col px-5 py-3" aria-label="Mobile">
+        <nav className="flex flex-col px-5 py-3" aria-label="Mobile" aria-hidden={!open}>
           {NAV.map((item) => (
             <Link
               key={item.href}
               href={item.href}
+              tabIndex={open ? undefined : -1}
               className={`flex items-center justify-between border-b border-line/50 py-3.5 font-mono text-sm last:border-0 ${
                 isActive(item.href) ? 'text-red-blood' : 'text-ink-dim'
               }`}
@@ -117,11 +138,16 @@ export default function Nav() {
               </span>
             </Link>
           ))}
-          <Link href="/cheatsheets/" className="py-3.5 font-mono text-sm text-red-blood">
+          <Link
+            href="/cheatsheets/"
+            className="py-3.5 font-mono text-sm text-red-blood"
+            tabIndex={open ? undefined : -1}
+          >
             Free cheatsheets →
           </Link>
         </nav>
       </div>
-    </header>
+      </header>
+    </>
   );
 }
